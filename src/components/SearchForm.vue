@@ -42,7 +42,13 @@ import { suppliersData } from '../data/suppliers'
 </template>
 
 <script>
-import { BASE_URL, GET_CATEGORIES, GET_SUPPLIERS, loadDummyData } from '../utils/constants'
+import {
+  BASE_URL,
+  GET_CATEGORIES,
+  GET_SUPPLIERS,
+  loadDummyData,
+  requestHeaders
+} from '../utils/constants'
 import axios from 'axios'
 export default {
   name: 'SearchForm',
@@ -73,7 +79,7 @@ export default {
     getCategories() {
       const endPoint = BASE_URL + GET_CATEGORIES
       axios
-        .post(endPoint, this.formData)
+        .get(endPoint, requestHeaders)
         .then((res) => {
           this.categories = res.data
         })
@@ -87,7 +93,7 @@ export default {
     getSuppliers() {
       const endPoint = BASE_URL + GET_SUPPLIERS
       axios
-        .post(endPoint)
+        .get(endPoint, requestHeaders)
         .then((res) => {
           this.suppliers = res.data
         })

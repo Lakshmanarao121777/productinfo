@@ -103,7 +103,8 @@ import {
   GET_CATEGORIES,
   GET_PRODUCT,
   GET_SUPPLIERS,
-  loadDummyData
+  loadDummyData,
+  requestHeaders
 } from '../utils/constants'
 export default {
   name: 'AddProduct',
@@ -152,7 +153,7 @@ export default {
     AddOrUpdate() {
       const endPoint = BASE_URL + (this.ProductID ? EDIT_PRODUCT : ADD_PRODUCT)
       axios
-        .post(endPoint, this.formData)
+        .post(endPoint, this.formData, requestHeaders)
         .then((res) => {
           alert('Success')
           console.log(res)
@@ -170,7 +171,7 @@ export default {
     getCategories() {
       const endPoint = BASE_URL + GET_CATEGORIES
       axios
-        .post(endPoint, this.formData)
+        .get(endPoint, requestHeaders)
         .then((res) => {
           this.categories = res.data
         })
@@ -184,7 +185,7 @@ export default {
     getSuppliers() {
       const endPoint = BASE_URL + GET_SUPPLIERS
       axios
-        .post(endPoint)
+        .get(endPoint, requestHeaders)
         .then((res) => {
           this.suppliers = res.data
         })
@@ -198,7 +199,7 @@ export default {
     getProduct() {
       const endPoint = BASE_URL + GET_PRODUCT
       axios
-        .post(endPoint, { ProductID: this.$route.params.ProductID })
+        .post(endPoint, { ProductID: this.$route.params.ProductID }, requestHeaders)
         .then((res) => {
           this.product = res.data
           this.formData = res.data

@@ -13,3 +13,11 @@ export const GET_CATEGORIES = '/GetCategories'
 export const GET_SUPPLIERS = '/GetSuppliers'
 
 export const loadDummyData = true
+export const requestHeaders = {
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Cache-Control': 'no-cache'
+  }
+}

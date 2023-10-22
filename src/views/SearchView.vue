@@ -21,6 +21,7 @@ import {
   DELETE_PRODUCT,
   GET_PRODUCTS,
   loadDummyData,
+  requestHeaders,
   SEARCH_PRODUCT
 } from '../utils/constants'
 export default {
@@ -43,7 +44,7 @@ export default {
       console.log('Delete item clicked', Product)
       const endPoint = BASE_URL + DELETE_PRODUCT
       axios
-        .post(endPoint, Product)
+        .post(endPoint, Product, requestHeaders)
         .then((res) => {
           alert('Success')
           console.log(res)
@@ -62,7 +63,7 @@ export default {
       console.log('search clicked', formData)
       const endPoint = BASE_URL + SEARCH_PRODUCT
       axios
-        .post(endPoint, formData)
+        .post(endPoint, formData, requestHeaders)
         .then((res) => {
           this.products = res.data
           console.log(res)
@@ -77,7 +78,7 @@ export default {
     getProducts() {
       const endPoint = BASE_URL + GET_PRODUCTS
       axios
-        .get(endPoint)
+        .get(endPoint, requestHeaders)
         .then((res) => {
           this.products = res.data
         })
