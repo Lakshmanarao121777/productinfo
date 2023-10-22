@@ -8,8 +8,8 @@ import ProductItem from './ProductItem.vue'
         <tr>
           <th scope="col">Product ID</th>
           <th scope="col">Product Name</th>
-          <th scope="col">Supplier Id</th>
-          <th scope="col">Category Id</th>
+          <th scope="col">Supplier ID</th>
+          <th scope="col">Category ID</th>
           <th scope="col">Quantity Per Unit</th>
           <th scope="col">Unit Price</th>
           <th scope="col">Units in stock</th>

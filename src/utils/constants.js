@@ -16,8 +16,17 @@ export const loadDummyData = true
 export const requestHeaders = {
   headers: {
     'Content-Type': 'application/json',
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'Cache-Control': 'no-cache'
   }
+}
+
+export const cleanObject = (obj) => {
+  for (var propName in obj) {
+    if (obj[propName] === null || obj[propName] === undefined) {
+      delete obj[propName];
+    }
+  }
+  return obj
 }

@@ -22,7 +22,8 @@ import {
   GET_PRODUCTS,
   loadDummyData,
   requestHeaders,
-  SEARCH_PRODUCT
+  SEARCH_PRODUCT,
+  cleanObject
 } from '../utils/constants'
 export default {
   name: 'SearchView',
@@ -63,7 +64,7 @@ export default {
       console.log('search clicked', formData)
       const endPoint = BASE_URL + SEARCH_PRODUCT
       axios
-        .post(endPoint, formData, requestHeaders)
+        .post(endPoint, cleanObject(formData), requestHeaders)
         .then((res) => {
           this.products = res.data
           console.log(res)
