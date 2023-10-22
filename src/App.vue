@@ -11,7 +11,7 @@
       <RouterLink to="/AddOrEdit">AddOrEdit</RouterLink>
     </nav>
   </div> -->
-  <div class="container">
+  <div class="container mb-4 pb-4">
     <RouterView />
   </div>
 </template>
