@@ -1,4 +1,4 @@
-export const suppliers = [
+export const suppliersData = [
   {
     SupplierID: '1',
     CompanyName: 'Amazon',

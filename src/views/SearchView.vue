@@ -1,5 +1,5 @@
 <script setup>
-import { products } from '../data/products'
+import { productsData } from '../data/products'
 import SearchForm from '../components/SearchForm.vue'
 import ProductsList from '../components/ProductsList.vue'
 </script>
@@ -7,7 +7,7 @@ import ProductsList from '../components/ProductsList.vue'
 <template>
   <SearchForm :search="search" />
   <hr />
-  <div class="tect-center">
+  <div class="text-center">
     <button class="btn btn-primary btn-sm" @click="addNewProduct">Add New Product</button>
   </div>
   <br />
@@ -16,9 +16,23 @@ import ProductsList from '../components/ProductsList.vue'
 
 <script>
 import axios from 'axios'
-import { BASE_URL, DELETE_PRODUCT, SEARCH_PRODUCT } from '../utils/constants'
+import {
+  BASE_URL,
+  DELETE_PRODUCT,
+  GET_PRODUCTS,
+  loadDummyData,
+  SEARCH_PRODUCT
+} from '../utils/constants'
 export default {
   name: 'SearchView',
+  created() {
+    this.getProducts()
+  },
+  data() {
+    return {
+      products: []
+    }
+  },
   methods: {
     addNewProduct() {
       this.$router.push({
@@ -50,15 +64,27 @@ export default {
       axios
         .post(endPoint, formData)
         .then((res) => {
-          alert('Success')
+          this.products = res.data
           console.log(res)
         })
-        .then(() => {
-          this.$router.push({
-            name: '/'
-          })
+        .catch((err) => {
+          if (loadDummyData) {
+            this.products = this.productsData
+          }
+          console.log(err)
+        })
+    },
+    getProducts() {
+      const endPoint = BASE_URL + GET_PRODUCTS
+      axios
+        .get(endPoint)
+        .then((res) => {
+          this.products = res.data
         })
         .catch((err) => {
+          if (loadDummyData) {
+            this.products = productsData
+          }
           console.log(err)
         })
     }

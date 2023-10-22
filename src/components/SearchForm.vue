@@ -2,8 +2,8 @@
 import InputBox from './InputBox.vue'
 import CheckBox from './CheckBox.vue'
 import SelectionBox from './SelectionBox.vue'
-// import { categories } from '../data/categories'
-// import { suppliers } from '../data/suppliers'
+import { categoriesData } from '../data/categories'
+import { suppliersData } from '../data/suppliers'
 </script>
 <template>
   <div class="text-center mt-4"><h1>Product SearchForm</h1></div>
@@ -42,7 +42,7 @@ import SelectionBox from './SelectionBox.vue'
 </template>
 
 <script>
-import { BASE_URL, GET_CATEGORIES, GET_SUPPLIERS } from '../utils/constants'
+import { BASE_URL, GET_CATEGORIES, GET_SUPPLIERS, loadDummyData } from '../utils/constants'
 import axios from 'axios'
 export default {
   name: 'SearchForm',
@@ -78,6 +78,9 @@ export default {
           this.categories = res.data
         })
         .catch((err) => {
+          if (loadDummyData) {
+            this.categories = categoriesData
+          }
           console.log(err)
         })
     },
@@ -89,6 +92,9 @@ export default {
           this.suppliers = res.data
         })
         .catch((err) => {
+          if (loadDummyData) {
+            this.suppliers = suppliersData
+          }
           console.log(err)
         })
     },

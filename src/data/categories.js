@@ -1,4 +1,4 @@
-export const categories = [
+export const categoriesData = [
   {
     CategoryID: '1',
     CategoryName: 'mobile',

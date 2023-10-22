@@ -29,19 +29,25 @@ import ProductItem from './ProductItem.vue'
     </table>
     <div class="d-flex justify-content-between">
       <div>
-
         <div class="d-flex mx-2">
-           <div class="mx-2 py-2"> Show</div> 
+          <div class="mx-2 py-2">Show</div>
           <select @change="setLimit" class="form-select">
-          <option value="5"> 5</option>
-          <option value="10"> 10</option>
-          <option value="20"> 20</option>
-          <option value="50"> 50</option>
-          <option value="100"> 100</option>
-          <option value="500"> 200</option>
-        </select></div>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">200</option>
+          </select>
+        </div>
       </div>
-      <div class="py-2"> Showing  {{ (currentPage * limit) + 1 }} to {{ products.length < ((currentPage + 1) * limit) ? products.length : ((currentPage + 1) * limit) }} of {{ products.length}} </div>
+      <div class="py-2">
+        Showing {{ currentPage * limit + 1 }} to
+        {{
+          products.length < (currentPage + 1) * limit ? products.length : (currentPage + 1) * limit
+        }}
+        of {{ products.length }}
+      </div>
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item">
@@ -54,11 +60,7 @@ import ProductItem from './ProductItem.vue'
               Previous
             </div>
           </li>
-          <li
-            class="page-item"
-            v-for="(i, key) of new Array(totalPages)"
-            :key="key"
-          >
+          <li class="page-item" v-for="(i, key) of new Array(totalPages)" :key="key">
             <div
               class="page-link"
               :class="{ active: key === currentPage }"
@@ -99,10 +101,10 @@ export default {
       this.currentPage = pageNo
     },
     setLimit(event) {
-      this.limit = event.target.value;
+      this.limit = event.target.value
       this.totalPages = Math.ceil(this.products.length / this.limit)
       if (this.totalPages < this.currentPage) {
-        this.currentPage = this.totalPages-1;
+        this.currentPage = this.totalPages - 1
       }
     }
   }

@@ -2,9 +2,9 @@
 import InputBox from './InputBox.vue'
 import CheckBox from './CheckBox.vue'
 import SelectionBox from './SelectionBox.vue'
-// import { categories } from '../data/categories'
-// import { suppliers } from '../data/suppliers'
-// import { products } from '../data/products'
+import { categoriesData } from '../data/categories'
+import { suppliersData } from '../data/suppliers'
+import { productsData } from '../data/products'
 </script>
 <template>
   <div class="text-center mt-4">
@@ -101,8 +101,9 @@ import {
   BASE_URL,
   EDIT_PRODUCT,
   GET_CATEGORIES,
+  GET_PRODUCT,
   GET_SUPPLIERS,
-  SEARCH_PRODUCT
+  loadDummyData
 } from '../utils/constants'
 export default {
   name: 'AddProduct',
@@ -123,7 +124,6 @@ export default {
       },
       categories: [],
       suppliers: [],
-      products: [],
       ProductID: 0,
       product: {}
     }
@@ -134,12 +134,12 @@ export default {
     this.getCategories()
     this.getSuppliers()
     if (this.$route.params.ProductID) {
-      this.getProducts()
-      this.product = {
-        ...this.products.filter((product) => {
-          return product.ProductID == this.ProductID
-        })
-      }
+      this.getProduct()
+      // this.product = {
+      //   ...this.products.filter((product) => {
+      //     return product.ProductID == this.ProductID
+      //   })
+      // }
     }
   },
   methods: {
@@ -175,6 +175,9 @@ export default {
           this.categories = res.data
         })
         .catch((err) => {
+          if (loadDummyData) {
+            this.categories = categoriesData
+          }
           console.log(err)
         })
     },
@@ -186,17 +189,29 @@ export default {
           this.suppliers = res.data
         })
         .catch((err) => {
+          if (loadDummyData) {
+            this.suppliers = suppliersData
+          }
           console.log(err)
         })
     },
-    getProducts() {
-      const endPoint = BASE_URL + SEARCH_PRODUCT
+    getProduct() {
+      const endPoint = BASE_URL + GET_PRODUCT
       axios
-        .post(endPoint, {})
+        .post(endPoint, { ProductID: this.$route.params.ProductID })
         .then((res) => {
-          this.products = res.data
+          this.product = res.data
+          this.formData = res.data
         })
         .catch((err) => {
+          if (loadDummyData) {
+            this.product = {
+              ...productsData.filter((product) => {
+                return product.ProductID == this.ProductID
+              })
+            }
+            this.formData = this.product
+          }
           console.log(err)
         })
     }
