@@ -135,7 +135,8 @@ export default {
     this.getCategories()
     this.getSuppliers()
     if (this.$route.params.ProductID) {
-      this.getProduct()
+      // this.getProduct()
+      this.getProducts()
       // this.product = {
       //   ...this.products.filter((product) => {
       //     return product.ProductID == this.ProductID
@@ -229,6 +230,31 @@ export default {
         .then((res) => {
           this.product = res.data
           this.formData = res.data
+        })
+        .catch((err) => {
+          if (loadDummyData) {
+            this.product = {
+              ...productsData.filter((product) => {
+                return product.ProductID == this.ProductID
+              })
+            }
+            this.formData = this.product
+          }
+          console.log(err)
+        })
+    },
+    getProducts() {
+      const endPoint = BASE_URL + GET_PRODUCTS
+      axios
+        .get(endPoint, requestHeaders)
+        .then((res) => {
+          const data = res.data.filter((product) => {
+                return parseInt(product.ProductID) == parseInt(this.ProductID)
+              });
+          this.product = {
+              ...data
+            }
+          this.formData = data[0]
         })
         .catch((err) => {
           if (loadDummyData) {
