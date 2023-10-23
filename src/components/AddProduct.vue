@@ -102,6 +102,7 @@ import {
   EDIT_PRODUCT,
   GET_CATEGORIES,
   GET_PRODUCT,
+  GET_PRODUCTS,
   GET_SUPPLIERS,
   loadDummyData,
   requestHeaders
