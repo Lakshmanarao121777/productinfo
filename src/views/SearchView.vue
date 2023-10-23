@@ -5,7 +5,7 @@ import ProductsList from '../components/ProductsList.vue'
 </script>
 
 <template>
-  <SearchForm :search="search" />
+  <SearchForm :search="search" :clear="clear"/>
   <hr />
   <div class="text-center">
     <button class="btn btn-primary btn-sm" @click="addNewProduct">Add New Product</button>
@@ -40,6 +40,12 @@ export default {
       this.$router.push({
         name: 'Add'
       })
+    },
+    clear() {
+      this.$router.go();
+      // this.$router.push({
+      //   name: 'Search'
+      // })
     },
     deleteItem(Product) {
       console.log('Delete item clicked', Product)

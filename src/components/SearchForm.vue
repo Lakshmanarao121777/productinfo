@@ -36,7 +36,7 @@ import { suppliersData } from '../data/suppliers'
     </div>
   </div>
   <div class="text-center">
-    <button class="btn btn-primary btn-sm my-2 mx-2">Clear</button>
+    <button class="btn btn-primary btn-sm my-2 mx-2" @click="clear">Clear</button>
     <button class="btn btn-primary btn-sm my-2 mx-2" @click="searchClick">Search</button>
   </div>
 </template>
@@ -52,7 +52,7 @@ import {
 import axios from 'axios'
 export default {
   name: 'SearchForm',
-  props: ['search'],
+  props: ['search', 'clear'],
   data() {
     return {
       searchData: {

@@ -87,7 +87,7 @@ import { productsData } from '../data/products'
     </div>
   </div>
   <div class="text-center">
-    <button class="btn btn-primary btn-sm my-2 mx-2">Clear</button>
+    <button class="btn btn-primary btn-sm my-2 mx-2" @click="clear">Clear</button>
     <button class="btn btn-primary btn-sm my-2 mx-2" @click="AddOrUpdate">
       {{ ProductID ? 'Update ' : 'Add ' }}Product
     </button>
@@ -150,6 +150,11 @@ export default {
         [e.target.name]: e.target.type == 'checkbox' ? e.target.checked : e.target.value
       }
     },
+    clear() {
+      this.$router.push({
+        name: 'Search'
+      })
+    },
     AddOrUpdate() {
       const endPoint = BASE_URL + (this.ProductID ? EDIT_PRODUCT : ADD_PRODUCT)
       axios
@@ -160,7 +165,7 @@ export default {
         })
         .then(() => {
           this.$router.push({
-            name: '/'
+            name: 'Search'
           })
         })
         .catch((err) => {

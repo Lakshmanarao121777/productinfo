@@ -20,7 +20,7 @@ import ProductItem from './ProductItem.vue'
         </tr>
       </thead>
       <tbody
-        v-for="(product, key) of products.slice(currentPage * limit, (currentPage + 1) * limit)"
+        v-for="(product, key) of products?.slice(currentPage * limit, (currentPage + 1) * limit)"
         :key="key"
         class="table-striped table-hover"
       >
