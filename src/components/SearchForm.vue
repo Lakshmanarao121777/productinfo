@@ -30,8 +30,8 @@ import { suppliersData } from '../data/suppliers'
     <div class="py-2 d-flex justify-content-between">
       <InputBox name="QuantityPerUnit" :change="change" placeholder="Quantity Per Unit" />
       <InputBox name="UnitPrice" :change="change" placeholder="Unit Price" />
-      <InputBox name="UnitStock" :change="change" placeholder="Unit Stock" />
-      <InputBox name="UnitInOrder" :change="change" placeholder="Unit In Order" />
+      <InputBox name="UnitInStock" :change="change" placeholder="Unit In Stock" />
+      <InputBox name="UnitsOnOrder" :change="change" placeholder="Units On Order" />
       <CheckBox name="Discontinued" :change="change" placeholder="Discontinued" />
     </div>
   </div>
@@ -63,8 +63,8 @@ export default {
         ReOrderLevel: '',
         QuantityPerUnit: '',
         UnitPrice: '',
-        UnitStock: '',
-        UnitInOrder: '',
+        UnitInStock: '',
+        UnitsOnOrder: '',
         Discontinued: false
       },
       categories: [],

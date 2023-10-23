@@ -65,18 +65,18 @@ import { productsData } from '../data/products'
         :value="product[0]?.UnitPrice"
       />
       <InputBox
-        name="UnitStock"
+        name="UnitInStock"
         :change="change"
-        placeholder="Unit Stock"
-        :value="product[0]?.UnitStock"
+        placeholder="Unit In Stock"
+        :value="product[0]?.UnitInStock"
       />
     </div>
     <div class="py-2 d-flex">
       <InputBox
-        name="UnitInOrder"
+        name="UnitsOnOrder"
         :change="change"
-        placeholder="Unit In Order"
-        :value="product[0]?.UnitInOrder"
+        placeholder="Units On Order"
+        :value="product[0]?.UnitsOnOrder"
       />
       <CheckBox
         name="Discontinued"
@@ -119,8 +119,8 @@ export default {
         ReOrderLevel: '',
         QuantityPerUnit: '',
         UnitPrice: '',
-        UnitStock: '',
-        UnitInOrder: '',
+        UnitInStock: '',
+        UnitsOnOrder: '',
         Discontinued: false
       },
       categories: [],
@@ -156,9 +156,30 @@ export default {
       })
     },
     AddOrUpdate() {
-      const endPoint = BASE_URL + (this.ProductID ? EDIT_PRODUCT : ADD_PRODUCT)
+      this.ProductID ? this.edit() : this.add()
+    },
+    Add() {
+      const endPoint = BASE_URL + ADD_PRODUCT
       axios
         .post(endPoint, this.formData, requestHeaders)
+        .then((res) => {
+          alert('Success')
+          console.log(res)
+        })
+        .then(() => {
+          this.$router.push({
+            name: 'Search'
+          })
+        })
+        .catch((err) => {
+          alert('Failed')
+          console.log(err)
+        })
+    },
+    edit() {
+      const endPoint = BASE_URL + EDIT_PRODUCT
+      axios
+        .put(endPoint, this.formData, requestHeaders)
         .then((res) => {
           alert('Success')
           console.log(res)
@@ -204,7 +225,7 @@ export default {
     getProduct() {
       const endPoint = BASE_URL + GET_PRODUCT
       axios
-        .post(endPoint, { ProductID: this.$route.params.ProductID }, requestHeaders)
+        .post(endPoint, { ProductID: parseInt(this.$route.params.ProductID) }, requestHeaders)
         .then((res) => {
           this.product = res.data
           this.formData = res.data

@@ -5,7 +5,7 @@ import ProductsList from '../components/ProductsList.vue'
 </script>
 
 <template>
-  <SearchForm :search="search" :clear="clear"/>
+  <SearchForm :search="search" :clear="clear" />
   <hr />
   <div class="text-center">
     <button class="btn btn-primary btn-sm" @click="addNewProduct">Add New Product</button>
@@ -42,7 +42,7 @@ export default {
       })
     },
     clear() {
-      this.$router.go();
+      this.$router.go()
       // this.$router.push({
       //   name: 'Search'
       // })
@@ -51,7 +51,7 @@ export default {
       console.log('Delete item clicked', Product)
       const endPoint = BASE_URL + DELETE_PRODUCT
       axios
-        .post(endPoint, Product, requestHeaders)
+        .delete(endPoint, Product, requestHeaders)
         .then((res) => {
           alert('Success')
           console.log(res)
