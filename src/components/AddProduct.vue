@@ -45,10 +45,10 @@ import { productsData } from '../data/products'
     </div>
     <div class="py-2 d-flex">
       <InputBox
-        name="ReOrderLevel"
+        name="ReorderLevel"
         :change="change"
         placeholder="Re-Order Level"
-        :value="product[0]?.ReOrderLevel"
+        :value="product[0]?.ReorderLevel"
       />
       <InputBox
         name="QuantityPerUnit"
@@ -65,10 +65,10 @@ import { productsData } from '../data/products'
         :value="product[0]?.UnitPrice"
       />
       <InputBox
-        name="UnitInStock"
+        name="UnitsInStock"
         :change="change"
-        placeholder="Unit In Stock"
-        :value="product[0]?.UnitInStock"
+        placeholder="Units In Stock"
+        :value="product[0]?.UnitsInStock"
       />
     </div>
     <div class="py-2 d-flex">
@@ -117,10 +117,10 @@ export default {
         ProductName: '',
         CategoryID: '',
         SupplierID: '',
-        ReOrderLevel: '',
+        ReorderLevel: '',
         QuantityPerUnit: '',
         UnitPrice: '',
-        UnitInStock: '',
+        UnitsInStock: '',
         UnitsOnOrder: '',
         Discontinued: false
       },

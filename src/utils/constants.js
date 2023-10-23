@@ -2,7 +2,7 @@
 export const BASE_URL = 'http://localhost:57308/api/Search'
 
 export const ADD_PRODUCT = '/AddProduct'
-export const EDIT_PRODUCT = '/EditProduct'
+export const EDIT_PRODUCT = '/UpdateProduct'
 export const DELETE_PRODUCT = '/DeleteProduct'
 
 export const SEARCH_PRODUCT = '/SearchProduct'

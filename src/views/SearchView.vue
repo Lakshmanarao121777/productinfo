@@ -51,7 +51,7 @@ export default {
       console.log('Delete item clicked', Product)
       const endPoint = BASE_URL + DELETE_PRODUCT
       axios
-        .delete(endPoint, Product, requestHeaders)
+        .delete(endPoint, { ProductId: Product.ProductID }, requestHeaders)
         .then((res) => {
           alert('Success')
           console.log(res)
