@@ -266,7 +266,7 @@ export default {
                 return product.ProductID == this.ProductID
               })
             }
-            this.formData = this.product
+            this.formData = this.product[0]
           }
           console.log(err)
         })
