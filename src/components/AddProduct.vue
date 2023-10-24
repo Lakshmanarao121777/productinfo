@@ -7,90 +7,92 @@ import { suppliersData } from '../data/suppliers'
 import { productsData } from '../data/products'
 </script>
 <template>
-  <div class="text-center mt-4">
-    <h1>Product {{ ProductID ? 'Update ' : 'Add ' }} Form</h1>
-  </div>
-  <div class="border border-secondary-subtle p-2 rounded bg-body-tertiary">
-    <div class="py-2 d-flex">
-      <InputBox
-        name="ProductID"
-        :change="change"
-        placeholder="Product ID"
-        :value="product[0]?.ProductID"
-      />
-      <InputBox
-        name="ProductName"
-        :change="change"
-        placeholder="Product Name"
-        :value="product[0]?.ProductName"
-      />
+  <div>
+    <div class="text-center mt-4">
+      <h1>Product {{ ProductID ? 'Update ' : 'Add ' }} Form</h1>
     </div>
-    <div class="py-2 d-flex">
-      <SelectionBox
-        name="CategoryID"
-        :change="change"
-        placeholder="Category Name"
-        :options="categories"
-        identifier="CategoryName"
-        :value="product[0]?.CategoryID"
-      />
-      <SelectionBox
-        name="SupplierID"
-        :change="change"
-        placeholder="Supplier Name"
-        :options="suppliers"
-        identifier="CompanyName"
-        :value="product[0]?.SupplierID"
-      />
+    <div class="border border-secondary-subtle p-2 rounded bg-body-tertiary">
+      <div class="py-2 d-flex">
+        <InputBox
+          name="ProductID"
+          :change="change"
+          placeholder="Product ID"
+          :value="product[0]?.ProductID"
+        />
+        <InputBox
+          name="ProductName"
+          :change="change"
+          placeholder="Product Name"
+          :value="product[0]?.ProductName"
+        />
+      </div>
+      <div class="py-2 d-flex">
+        <SelectionBox
+          name="CategoryID"
+          :change="change"
+          placeholder="Category Name"
+          :options="categories"
+          identifier="CategoryName"
+          :value="product[0]?.CategoryID"
+        />
+        <SelectionBox
+          name="SupplierID"
+          :change="change"
+          placeholder="Supplier Name"
+          :options="suppliers"
+          identifier="CompanyName"
+          :value="product[0]?.SupplierID"
+        />
+      </div>
+      <div class="py-2 d-flex">
+        <InputBox
+          name="ReorderLevel"
+          :change="change"
+          placeholder="Re-Order Level"
+          :value="product[0]?.ReorderLevel"
+        />
+        <InputBox
+          name="QuantityPerUnit"
+          :change="change"
+          placeholder="Quantity Per Unit"
+          :value="product[0]?.QuantityPerUnit"
+        />
+      </div>
+      <div class="py-2 d-flex">
+        <InputBox
+          name="UnitPrice"
+          :change="change"
+          placeholder="Unit Price"
+          :value="product[0]?.UnitPrice"
+        />
+        <InputBox
+          name="UnitsInStock"
+          :change="change"
+          placeholder="Units In Stock"
+          :value="product[0]?.UnitsInStock"
+        />
+      </div>
+      <div class="py-2 d-flex">
+        <InputBox
+          name="UnitsOnOrder"
+          :change="change"
+          placeholder="Units On Order"
+          :value="product[0]?.UnitsOnOrder"
+        />
+        <CheckBox
+          name="Discontinued"
+          :change="change"
+          placeholder="Discontinued"
+          :value="product[0]?.Discontinued"
+        />
+      </div>
     </div>
-    <div class="py-2 d-flex">
-      <InputBox
-        name="ReorderLevel"
-        :change="change"
-        placeholder="Re-Order Level"
-        :value="product[0]?.ReorderLevel"
-      />
-      <InputBox
-        name="QuantityPerUnit"
-        :change="change"
-        placeholder="Quantity Per Unit"
-        :value="product[0]?.QuantityPerUnit"
-      />
+    <div class="text-center">
+      <button class="btn btn-primary btn-sm my-2 mx-2" @click="clear">Clear</button>
+      <button class="btn btn-primary btn-sm my-2 mx-2" @click="AddOrUpdate">
+        {{ ProductID ? 'Update ' : 'Add ' }}Product
+      </button>
     </div>
-    <div class="py-2 d-flex">
-      <InputBox
-        name="UnitPrice"
-        :change="change"
-        placeholder="Unit Price"
-        :value="product[0]?.UnitPrice"
-      />
-      <InputBox
-        name="UnitsInStock"
-        :change="change"
-        placeholder="Units In Stock"
-        :value="product[0]?.UnitsInStock"
-      />
-    </div>
-    <div class="py-2 d-flex">
-      <InputBox
-        name="UnitsOnOrder"
-        :change="change"
-        placeholder="Units On Order"
-        :value="product[0]?.UnitsOnOrder"
-      />
-      <CheckBox
-        name="Discontinued"
-        :change="change"
-        placeholder="Discontinued"
-        :value="product[0]?.Discontinued"
-      />
-    </div>
-  </div>
-  <div class="text-center">
-    <button class="btn btn-primary btn-sm my-2 mx-2" @click="clear">Clear</button>
-    <button class="btn btn-primary btn-sm my-2 mx-2" @click="AddOrUpdate">
-      {{ ProductID ? 'Update ' : 'Add ' }}Product
-    </button>
   </div>
 </template>
 
@@ -149,7 +151,7 @@ export default {
     change(e) {
       this.formData = {
         ...this.formData,
-        [e.target.name]: e.target.type == 'checkbox' ? e.target.checked : e.target.value
+        [e?.target?.name]: e?.target?.type === 'checkbox' ? e.target.checked : e.target.value
       }
     },
     clear() {
@@ -160,7 +162,7 @@ export default {
     AddOrUpdate() {
       this.ProductID ? this.edit() : this.add()
     },
-    Add() {
+    add() {
       const endPoint = BASE_URL + ADD_PRODUCT
       axios
         .post(endPoint, this.formData, requestHeaders)
@@ -250,11 +252,11 @@ export default {
         .get(endPoint, requestHeaders)
         .then((res) => {
           const data = res.data.filter((product) => {
-                return parseInt(product.ProductID) == parseInt(this.ProductID)
-              });
+            return parseInt(product.ProductID) == parseInt(this.ProductID)
+          })
           this.product = {
-              ...data
-            }
+            ...data
+          }
           this.formData = data[0]
         })
         .catch((err) => {

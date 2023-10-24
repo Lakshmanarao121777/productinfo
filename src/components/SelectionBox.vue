@@ -1,8 +1,6 @@
-<script setup>
-// import { Button } from 'bootstrap'
-</script>
+<script setup></script>
 <template>
-  <div class="form-group flex-fill mx-2">
+  <div class="mx-2">
     <label :for="name">{{ placeholder }}</label>
     <select
       @change="(event) => change(event)"
@@ -13,9 +11,9 @@
       :value="value"
     >
       <option value="">Select {{ placeholder }}</option>
-      <template v-for="(option, key) of options" :key="key">
-        <option :value="option?.[name]">{{ option?.[identifier] }}</option>
-      </template>
+      <option v-for="(option, key) of options" :key="key" :value="option?.[name]">
+        {{ option?.[identifier] }}
+      </option>
     </select>
   </div>
 </template>

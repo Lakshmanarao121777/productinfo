@@ -12,7 +12,7 @@ export const GET_PRODUCT = '/GetProduct'
 export const GET_CATEGORIES = '/GetCategories'
 export const GET_SUPPLIERS = '/GetSuppliers'
 
-export const loadDummyData = !true
+export const loadDummyData = true
 export const requestHeaders = {
   headers: {
     // 'Content-Type': 'application/json',

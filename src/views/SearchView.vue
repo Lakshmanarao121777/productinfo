@@ -5,13 +5,15 @@ import ProductsList from '../components/ProductsList.vue'
 </script>
 
 <template>
-  <SearchForm :search="search" :clear="clear" />
-  <hr />
-  <div class="text-center">
-    <button class="btn btn-primary btn-sm" @click="addNewProduct">Add New Product</button>
+  <div>
+    <SearchForm :search="search" :clear="clear" />
+    <hr />
+    <div class="text-center">
+      <button class="btn btn-primary btn-sm" @click="addNewProduct">Add New Product</button>
+    </div>
+    <br />
+    <ProductsList :products="products" :deleteItem="deleteItem" />
   </div>
-  <br />
-  <ProductsList :products="products" :deleteItem="deleteItem" />
 </template>
 
 <script>

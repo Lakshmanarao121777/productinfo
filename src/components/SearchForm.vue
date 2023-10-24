@@ -6,38 +6,40 @@ import { categoriesData } from '../data/categories'
 import { suppliersData } from '../data/suppliers'
 </script>
 <template>
-  <div class="text-center mt-4"><h1>Product SearchForm</h1></div>
-  <div class="border border-secondary-subtle p-2 rounded bg-body-tertiary">
-    <div class="py-2 d-flex">
-      <InputBox name="ProductID" :change="change" placeholder="Product ID" />
-      <InputBox name="ProductName" :change="change" placeholder="Product Name" />
-      <SelectionBox
-        name="CategoryID"
-        :change="change"
-        placeholder="Category Name"
-        :options="categories"
-        identifier="CategoryName"
-      />
-      <SelectionBox
-        name="SupplierID"
-        :change="change"
-        placeholder="Supplier Name"
-        :options="suppliers"
-        identifier="CompanyName"
-      />
-      <InputBox name="ReorderLevel" :change="change" placeholder="Re-Order Level" />
+  <div>
+    <div class="text-center mt-4"><h1>Product SearchForm</h1></div>
+    <div class="border border-secondary-subtle p-2 rounded bg-body-tertiary">
+      <div class="py-2 d-flex">
+        <InputBox name="ProductID" :change="change" placeholder="Product ID" />
+        <InputBox name="ProductName" :change="change" placeholder="Product Name" />
+        <SelectionBox
+          name="CategoryID"
+          :change="change"
+          placeholder="Category Name"
+          :options="categories"
+          identifier="CategoryName"
+        />
+        <SelectionBox
+          name="SupplierID"
+          :change="change"
+          placeholder="Supplier Name"
+          :options="suppliers"
+          identifier="CompanyName"
+        />
+        <InputBox name="ReorderLevel" :change="change" placeholder="Re-Order Level" />
+      </div>
+      <div class="py-2 d-flex justify-content-between">
+        <InputBox name="QuantityPerUnit" :change="change" placeholder="Quantity Per Unit" />
+        <InputBox name="UnitPrice" :change="change" placeholder="Unit Price" />
+        <InputBox name="UnitsInStock" :change="change" placeholder="Units In Stock" />
+        <InputBox name="UnitsOnOrder" :change="change" placeholder="Units On Order" />
+        <CheckBox name="Discontinued" :change="change" placeholder="Discontinued" />
+      </div>
     </div>
-    <div class="py-2 d-flex justify-content-between">
-      <InputBox name="QuantityPerUnit" :change="change" placeholder="Quantity Per Unit" />
-      <InputBox name="UnitPrice" :change="change" placeholder="Unit Price" />
-      <InputBox name="UnitsInStock" :change="change" placeholder="Units In Stock" />
-      <InputBox name="UnitsOnOrder" :change="change" placeholder="Units On Order" />
-      <CheckBox name="Discontinued" :change="change" placeholder="Discontinued" />
+    <div class="text-center">
+      <button class="btn btn-primary btn-sm my-2 mx-2" @click="clear">Clear</button>
+      <button class="btn btn-primary btn-sm my-2 mx-2" @click="searchClick">Search</button>
     </div>
-  </div>
-  <div class="text-center">
-    <button class="btn btn-primary btn-sm my-2 mx-2" @click="clear">Clear</button>
-    <button class="btn btn-primary btn-sm my-2 mx-2" @click="searchClick">Search</button>
   </div>
 </template>
 
@@ -105,9 +107,10 @@ export default {
         })
     },
     change(e) {
+      console.log(e, 'asd')
       this.searchData = {
         ...this.searchData,
-        [e.target.name]: e.target.type == 'checkbox' ? e.target.checked : e.target.value
+        [e?.target?.name]: e?.target?.type == 'checkbox' ? e.target.checked : e.target.value
       }
     },
     searchClick() {
